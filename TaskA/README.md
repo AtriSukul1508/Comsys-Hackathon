@@ -57,9 +57,12 @@ The ```main.py``` script orchestrates the entire workflow. We can run it from th
 
 
 To evaluate a pre-trained model on a separate test set:
-(Requires best_model.pth and your test data to be in the specified directory.)
+(Requires model.pth and your test data to be in the specified directory.)
 
 ```python main.py --evaluate_only --test_data_dir /path/to/your/dataset/test```
+
+
+#### The optimal model weights can be accessed and downloaded from [*model.pth*](https://drive.google.com/file/d/1gXEd6ah-tMb6XI0VT9fIKhFPhm95B99m/view?usp=sharing).
 
 ## Command-line Arguments
 Here's a detailed list of all available command-line arguments for ```main.py```:
