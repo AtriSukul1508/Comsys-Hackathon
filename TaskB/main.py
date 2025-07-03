@@ -5,10 +5,12 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 import os
 import argparse
 
-from utils.data_processing import get_transforms,get_datasets_and_loaders
+from utils.data_processing import get_transforms,get_datasets_and_loaders,train_dir,val_dir,test_dir
 from utils.model import SiameseNetwork, device
 from utils.loss import SiameseHybridLoss
 from utils.train import train_siamese_model, evaluate_siamese_model, plot_training_curves
+from utils.test import test_model
+
 
 def main(args):
    
@@ -19,15 +21,14 @@ def main(args):
     train_loader, val_loader,test_loader = get_datasets_and_loaders(
         train_transform, val_transform,test_transform,
         train_data_dir=args.train_dir,val_data_dir=args.val_dir,
-        test_data_dir=args.test_dir,
-        batch_size=args.batch_size
+        test_data_dir=args.test_dir
     )
 
     # Initialize model, criterion, optimizer, and scheduler
     model = SiameseNetwork(embedding_dim=args.embedding_dim)
     criterion = SiameseHybridLoss(margin=args.margin, alpha=args.alpha)
     optimizer = AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=3, verbose=True)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=3)
 
 
 
@@ -71,12 +72,11 @@ def main(args):
 
     if is_training_weight_available:
         print("\nStarting testing...")
-        test_loss, test_acc = test_model(
+        accuracy, _, _, f1 = test_model(
             model, test_loader, device,
-            criterion=criterion,
             save_path=args.model_save_path # Use the same path where best model was saved
         )
-        print(f"Final Test Loss: {test_loss:.4f} | Final Test Accuracy: {test_acc:.4f}")
+        print(f"Top-1 Accuracy: {accuracy:.4f} | F1-Score : {f1:.4f}")
         results = evaluate_siamese_model(
         model,
         test_loader,
@@ -89,11 +89,11 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Face Recognition Model")
     
-    parser.add_argument('--train_dir', type=str,
+    parser.add_argument('--train_dir', type=str,default=train_dir,
                         help="Path to the training data root directory.")
-    parser.add_argument('--val_dir', type=str,
+    parser.add_argument('--val_dir', type=str,default=val_dir,
                         help="Path to the validation data root directory.")
-    parser.add_argument('--test_dir', type=str, required=True,
+    parser.add_argument('--test_dir', type=str, default=test_dir, required=True,
                         help="Path to the validation data root directory.")
     parser.add_argument('--evaluate_only', action='store_true',
                     help='If set, skips training and only performs evaluation on the loaded model.')
