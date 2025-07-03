@@ -54,20 +54,20 @@ def get_transforms():
 
     return train_transform, val_transform ,test_transform
 
-def get_datasets_and_loaders(train_transform, val_transform,test_transform, batch_size=32):
+def get_datasets_and_loaders(train_transform, val_transform,test_transform, train_data_dir=train_dir,val_data_dir=val_dir, test_data_dir=test_dir,batch_size=32):
 
-    train_dataset = ImageFolder(train_dir, transform=train_transform)
-    val_dataset = ImageFolder(val_dir, transform=val_transform)
-    # test_dataset = ImageFolder(test_dir,transform=test_transform)
+    train_dataset = ImageFolder(train_data_dir, transform=train_transform)
+    val_dataset = ImageFolder(val_data_dir, transform=val_transform)
+    test_dataset = ImageFolder(test_data_dir,transform=test_transform)
     sampler, class_weights = compute_sampler_and_weights(train_dataset)
     train_loader = DataLoader(train_dataset, batch_size=batch_size, sampler=sampler)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
-    # test_loader = DataLoader(test_dataset,batch_size=batch_size,shuffle=False)
+    test_loader = DataLoader(test_dataset,batch_size=batch_size,shuffle=False)
     print(f"Total training samples: {len(train_loader.dataset)}")
     print(f"Total validation samples: {len(val_loader.dataset)}")
-    # print(f"Total testing samples: {len(test_loader.dataset)}")
+    print(f"Total testing samples: {len(test_loader.dataset)}")
 
-    return train_loader, val_loader, train_dataset, val_dataset #,test_loader,test_dataset
+    return train_loader, val_loader, train_dataset, val_dataset ,test_loader,test_dataset
 
 def compute_sampler_and_weights(train_dataset):
 
