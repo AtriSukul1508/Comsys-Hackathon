@@ -21,8 +21,6 @@ TaskA/
 ```
 
 Setup
-Clone the repository (or create the files manually):
-
 
 Install dependencies from requirements.txt:
 
@@ -32,58 +30,55 @@ Data Preparation
 The code expects your dataset to be organized in the following structure:
 ```
 data/
-├── train/
-│   ├── male/
-│   │   ├── image.jpg
-│   │   └── ...
-│   └── female/
-│       ├── image.jpg
-│       └── ...
-└── val/
-    ├── male/
-    │   ├── image.jpg
-    │   └── ...
-    └── female/
-        ├── image.jpg
-        └── ...
+├── Task_A/
+        ├── train/
+        │   ├── male/
+        │   │   ├── image.jpg
+        │   │   └── ...
+        │   └── female/
+        │       ├── image.jpg
+        │       └── ...
+        └── val/
+            ├── male/
+            │   ├── image.jpg
+            │   └── ...
+            └── female/
+                ├── image.jpg
+                └── ...
 ```
 By default, the ```utils/data_processing.py``` script uses ```train_dir,val_dir``` and ```test_dir``` variables values as directory. We can change these paths via command-line arguments in ```main.py``` to point to our actual data locations.
 
 ## How to Run
-The ```main.py``` script orchestrates the entire workflow. We can run it from the project's root directory (**TaskA/**) using the ```python main.py``` command, along with various arguments to control its behavior.
+The ```main.py``` script handles the entire workflow. We can run it from the project's root directory (**TaskA/**) using the ```python main.py``` command, along with various arguments to control its behavior.
 
 
-```--evaluate_only```: Performs testing only. This mode requires a pre-trained model to be available at the path specified by ```--model_save_path```. By default ```--model_save_path``` value is set to ```model.pth```. Pretrained we
+```--evaluate_only```: Performs testing only. This requires either a pre-trained model to be available at the path specified by ```--model_save_path``` or model training. By default ```--model_save_path``` value is set to ```best_model.pth```.
 
 
-To evaluate a pre-trained model on a separate test set:
-(Requires model.pth and your test data to be in the specified directory.)
+To evaluate a model on a separate test set: we need another additional argument ```--test_data_dir``` along with the ```--evaluate_only``` argument.
 
-```python main.py --evaluate_only --test_data_dir /path/to/your/dataset/test```
-
-
-#### The optimal model weights can be accessed and downloaded from [*model.pth*](https://drive.google.com/file/d/1gXEd6ah-tMb6XI0VT9fIKhFPhm95B99m/view?usp=sharing).
+```python main.py --evaluate_only --test_data_dir /path/to/test/dataset```
+#### 
+> [!IMPORTANT]
+> 1. the ```--test_data_dir``` argument is required always. <br/>
+> 2. The pre-trained model weights can be accessed and downloaded from [*best_model.pth*](https://drive.google.com/file/d/1gXEd6ah-tMb6XI0VT9fIKhFPhm95B99m/view?usp=sharing).
 
 ## Command-line Arguments
 Here's a detailed list of all available command-line arguments for ```main.py```:
 
-*The models are run with the default values of the arguments listed below unless explicitly overridden via command-line arguments.*
+> [!IMPORTANT]
+> *The models are run with the default values of the arguments listed below unless explicitly overridden via command-line arguments.*
 
-Data Arguments:
 
 ```--train_data_dir (type: str, default: '../data/Task_A/train')```: Path to the training data directory.
 
 ```--val_data_dir (type: str, default: '../data/Task_A/val')```: Path to the validation data directory.
 
-```--test_data_dir (type: str, default: "")```: Path to the test data directory. Since, the test data is not given, default value of ```---test_data_dir``` is set to ```""```.
+```--test_data_dir (type: str, default: "",required=True)```: Path to the test data directory. Since, the test data is not given, default value of ```---test_data_dir``` is set to ```""```.
 
 ```--batch_size (type: int, default: 32)```: Batch size for data loaders.
 
-Model Arguments:
-
 ```--num_classes (type: int, default: 2)```: Number of output classes for the model (e.g., 2 for male/female).
-
-Training Arguments:
 
 ```--epochs (type: int, default: 50)```: Number of training epochs.
 
@@ -104,7 +99,6 @@ Training Arguments:
 ```--lr_decay_factor (type: float, default: 0.5)```: Factor by which the learning rate will be reduced (e.g., new_lr = old_lr * factor).
 
 Output Paths:
-
 
 ```--model_save_path (type: str, default: model.pth)```: Path to save the best trained model weights during training, or to load weights from for testing.
 
