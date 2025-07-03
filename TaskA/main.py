@@ -16,25 +16,27 @@ def main(args):
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"device: {device}")
-
+    is_training_weight_available = True
     
     train_transform, val_transform, test_transform = get_transforms()
-    train_loader, val_loader, train_dataset, val_dataset = get_datasets_and_loaders(
-        train_transform, val_transform,test_transform, batch_size=args.batch_size
-    )
-    # train_loader, val_loader, train_dataset, val_dataset ,test_loader,test_dataset = get_datasets_and_loaders(
-    #     train_transform, val_transform,test_transform, batch_size=args.batch_size
-    # ) # uncomment when using test dataset
+    
+    train_loader, val_loader, train_dataset, val_dataset ,test_loader,test_dataset = get_datasets_and_loaders(
+        train_transform, val_transform,test_transform,train_data_dir=args.train_data_dir,val_data_dir=args.val_data_dir,test_data_dir=args.test_data_dir, batch_size=args.batch_size
+    ) # uncomment when using test dataset
 
     
     model = get_model(num_classes=2)
     model.to(device)
 
-    if os.path.exists(args.model_save_path):
+    if os.path.exists(args.model_save_path) and args.evaluate_only:
         print(f"Loading model weights from {args.model_save_path}.")
         model.load_state_dict(torch.load(args.model_save_path, map_location=device))
-    else:
+        is_training_weight_available=True
+    elif args.evaluate_only:
         print(f"No existing model weights found at {args.model_save_path}. Training is required.")   
+        is_training_weight_available = False
+    else:
+        print()
 
     
     criterion = nn.CrossEntropyLoss(label_smoothing=args.label_smoothing)
@@ -61,22 +63,22 @@ def main(args):
         if history:
             plots(history, save_dir=args.plot_save_dir)
             print("Training curves plotted and saved.")
-        results = evaluate_model(model, val_loader, device,class_names=val_dataset.classes,save_dir=args.plot_save_dir)
+        results = evaluate_model(model, val_loader, device,type='train',class_names=val_dataset.classes,save_dir=args.plot_save_dir)
         
     else:
         history = None
 
     # Testing
-
-    print("\nStarting testing...")
-    # test_loss, test_acc = test_model(
-    #     model, test_loader, device,
-    #     criterion=criterion,
-    #     save_path=args.model_save_path # Use the same path where best model was saved
-    # )
-    # print(f"Final Test Loss: {test_loss:.4f} | Final Test Accuracy: {test_acc:.4f}")
-    # results = evaluate_model(model, test_loader, device,class_names=test_dataset.classes,save_dir=args.plot_save_dir)
-    # # print(results)
+    if is_training_weight_available:
+        print("\nStarting testing...")
+        test_loss, test_acc = test_model(
+            model, test_loader, device,
+            criterion=criterion,
+            save_path=args.model_save_path # Use the same path where best model was saved
+        )
+        print(f"Final Test Loss: {test_loss:.4f} | Final Test Accuracy: {test_acc:.4f}")
+        results = evaluate_model(model, test_loader, device,type='test',class_names=test_dataset.classes,save_dir=args.plot_save_dir)
+        # print(results)
 
 
 
@@ -89,8 +91,8 @@ if __name__ == '__main__':
                         help='Path to the training data directory.')
     parser.add_argument('--val_data_dir', type=str, default=val_dir,
                         help='Path to the validation data directory.')
-    parser.add_argument('--test_data_dir', type=str, default=test_dir,
-                        help='Path to the testing data directory.')
+    parser.add_argument('--test_data_dir', type=str, default=test_dir, 
+                        required=True, help='Path to the testing data directory.')
     parser.add_argument('--batch_size', type=int, default=32,
                         help='Batch size for data loaders.')
 
