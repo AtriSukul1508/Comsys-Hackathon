@@ -48,9 +48,10 @@ class SiameseFaceDataset(Dataset):
         self.identity_folders = [os.path.join(root_dir, d) for d in os.listdir(root_dir)
                                  if os.path.isdir(os.path.join(root_dir, d))]
 
-      
+        # Map: identity_name -> list of all images (clean + distorted)
         self.identity_images = self._load_identity_images()
 
+        # Generate all pairs (balanced)
         self.pairs = self._create_pairs()
 
     def _load_identity_images(self):
@@ -116,7 +117,7 @@ class SiameseFaceDataset(Dataset):
 
         return image1, image2, label
 
-def get_datasets_and_loaders(train_transform, val_transform,test_transform, train_data_dir=train_dir,val_data_dir=val_dir, test_data_dir=test_dir,batch_size=32):
+def get_datasets_and_loaders(train_transform, val_transform,test_transform, train_data_dir=train_dir,val_data_dir=val_dir, test_data_dir=test_dir):
 
     train_dataset = SiameseFaceDataset(train_data_dir, transform=train_transform)
     val_dataset = SiameseFaceDataset(val_data_dir, transform=val_transform)
