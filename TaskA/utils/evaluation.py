@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-def evaluate_model(model, loader,device, class_names=None, plot_cm=True,save_dir='plots'):
+def evaluate_model(model, loader,device, type='train',class_names=None, plot_cm=True,save_dir='plots'):
     model.eval()
     y_true, y_pred = [], []
 
@@ -49,7 +49,7 @@ def evaluate_model(model, loader,device, class_names=None, plot_cm=True,save_dir
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
         
-    cm_plot_path = os.path.join(save_dir, 'confusion_matrix.png')
+    cm_plot_path = os.path.join(save_dir, f'{type}_confusion_matrix.png')
     plt.savefig(cm_plot_path)
     print(f"Confusion matrix saved to {cm_plot_path}")
 
