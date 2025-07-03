@@ -1,4 +1,4 @@
-# src/train.py
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -176,9 +176,6 @@ def evaluate_siamese_model(model, loader, threshold=0.5, plot_cm=True,save_dir='
             img1, img2, labels = img1.to(device), img2.to(device), labels.float().to(device)
 
             emb1, emb2 = model(img1, img2)
-            # Embeddings are already normalized by the model's forward_once method
-            # emb1 = F.normalize(emb1, p=2, dim=1) # Not needed if model already normalizes
-            # emb2 = F.normalize(emb2, p=2, dim=1) # Not needed if model already normalizes
 
             cosine_sim = F.cosine_similarity(emb1, emb2)
             preds = (cosine_sim > threshold).int()
@@ -192,12 +189,12 @@ def evaluate_siamese_model(model, loader, threshold=0.5, plot_cm=True,save_dir='
     rec = recall_score(y_true, y_pred, average='binary', zero_division=0)
     f1 = f1_score(y_true, y_pred, average='binary', zero_division=0)
 
-    print("\n📊 Classification Report:\n", classification_report(
+    print("\nClassification Report:\n", classification_report(
         y_true, y_pred, target_names=["Different", "Same"]))
-    print("✅ Accuracy:", acc)
-    print("🎯 Precision:", prec)
-    print("🔁 Recall:", rec)
-    print("🏅 F1 Score:", f1)
+    print("Accuracy:", acc)
+    print("Precision:", prec)
+    print("Recall:", rec)
+    print("F1 Score:", f1)
 
     if plot_cm:
         cm = confusion_matrix(y_true, y_pred)
