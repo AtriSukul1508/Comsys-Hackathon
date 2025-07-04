@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from tqdm import tqdm
 import os
 
-def test_model(model, dataloader, device, threshold=0.5,save_path='best_siamese_model.pth'):
+def test_model(model, dataloader, device, threshold=0.5,save_path='best_model.pth'):
 
     
     if not os.path.exists(save_path):
@@ -23,10 +23,9 @@ def test_model(model, dataloader, device, threshold=0.5,save_path='best_siamese_
         for img1, img2, label in tqdm(dataloader, desc="Testing"):
             img1, img2, label = img1.to(device), img2.to(device), label.to(device).float()
 
-            output1 = model(img1)
-            output2 = model(img2)
+            emb1,emb2 = model(img1,img2)
 
-            similarity = F.cosine_similarity(output1, output2)
+            similarity = F.cosine_similarity(emb1, emb2)
 
             preds = (similarity > threshold).float()
 
