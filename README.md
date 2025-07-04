@@ -54,12 +54,16 @@ The objective was to classify the gender of individuals from facial images. This
 
 We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as the backbone for this task. The transformer is well-suited for image classification tasks due to its hierarchical representation and shifted window mechanism.
 
+
 #### Model Customization
 
 - We removed the default classification head of the Swin Transformer and replaced it with:
   - A `Dropout` layer
   - A `Linear` layer for binary classification (`out_features=2`)
 - We added **CrossEntropyLoss** as the loss function for this binary classification problem.
+
+#### Model Architecture
+![TaskA](https://github.com/user-attachments/assets/daa62f82-7df4-438e-b76b-d7333d464109)
 
 #### Dataset Handling
 
