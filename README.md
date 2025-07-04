@@ -75,8 +75,9 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 #### Evaluation Metrics
 
 - **Accuracy**
-- **Confusion Matrix**
-- **Classification Report** (Precision, Recall, F1)
+- **Precision**
+- **Recall**
+- **F1-Score**
 
 ---
 > [!NOTE]
@@ -87,7 +88,7 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 
 ### Problem Statement
 
-This is a face recognition task where the goal is Assign each face image to a correct person identity from a known set of individuals.
+This is a face recognition task where the goal is to assign each face image to a correct person identity from a known set of individuals.
 
 ---
 
@@ -99,8 +100,7 @@ We implemented a **Siamese Network** architecture using **Swin Transformer V2** 
 
 - The same Swin Transformer (`swin_v2_s`) was shared between two input branches.
 - Feature vectors from both branches were compared using the **L1 distance** (absolute difference).
-- The final decision was made using a small decision head:
-  - Fully Connected Layer → BatchNorm → Dropout → Output Layer (`sigmoid`).
+- The final decision was made using a small decision head.
 
 #### Loss Function
 
@@ -119,6 +119,6 @@ We implemented a **Siamese Network** architecture using **Swin Transformer V2** 
 - **Macro-averaged F1-Score**
 ---
 > [!NOTE]
-> More about how to run the code is discussed in [Task A README](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/TaskB/README.md) <br/>
-> The pre-trained model weights for Task A can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1mB9Lqozewq4QgigvqeLhURdgIKyrKcZD/view?usp=sharing).
+> More about how to run the code is discussed in [Task B README](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/TaskB/README.md) <br/>
+> The pre-trained model weights for Task A can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1xtsd0zAtk8nWcTCWY_7lWZvt-knz6YIy/view?usp=sharing).
 
