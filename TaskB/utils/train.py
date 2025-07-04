@@ -1,4 +1,4 @@
-
+# src/train.py
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -23,7 +23,7 @@ def train_siamese_model(
     max_grad_norm=1.0,
     use_amp=True,
     cosine_threshold=0.5, # Threshold for similarity-based prediction
-    model_save_path="best_siamese_model.pth"
+    save_path="best_model.pth"
 ):
     model.to(device)
     scaler = GradScaler() if use_amp else None
@@ -102,7 +102,7 @@ def train_siamese_model(
         val_acc = accuracy_score(val_labels, np.round(val_preds))
 
         # ---------- Logging ----------
-        print(f"📘 Epoch [{epoch+1}/{epochs}] "
+        print(f" Epoch [{epoch+1}/{epochs}] "
               f"| Train Loss: {train_loss:.4f}, Acc: {train_acc:.4f} "
               f"| Val Loss: {val_loss:.4f}, Acc: {val_acc:.4f}")
 
@@ -118,8 +118,8 @@ def train_siamese_model(
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             best_model_state = model.state_dict()
-            torch.save(best_model_state, model_save_path)
-            print(f"Model saved to {model_save_path} with improved validation loss: {best_val_loss:.4f}")
+            torch.save(best_model_state, save_path)
+            print(f"Model saved to {save_path} with best validation loss: {best_val_loss:.4f}")
             trigger_times = 0
         else:
             trigger_times += 1
@@ -130,7 +130,6 @@ def train_siamese_model(
 
     if best_model_state:
         model.load_state_dict(best_model_state)
-        print("Loaded best model state for final evaluation.")
 
     return history
 
@@ -191,10 +190,10 @@ def evaluate_siamese_model(model, loader, threshold=0.5, plot_cm=True,save_dir='
 
     print("\nClassification Report:\n", classification_report(
         y_true, y_pred, target_names=["Different", "Same"]))
-    print("Accuracy:", acc)
-    print("Precision:", prec)
-    print("Recall:", rec)
-    print("F1 Score:", f1)
+    print(f"Accuracy:, {acc:.4f}")
+    print(f"Precision:, {prec:.4f}")
+    print(f"Recall:, {rec:.4f}")
+    print(f"F1 Score:, {f1:.4f}")
 
     if plot_cm:
         cm = confusion_matrix(y_true, y_pred)
