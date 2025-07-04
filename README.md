@@ -30,14 +30,13 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 
 #### Dataset Handling
 
-- Images were loaded and preprocessed with `transforms.Resize`, `transforms.CenterCrop`, and `transforms.ToTensor`.
+- Images were loaded and preprocessed with transforms techniques.
 - A **WeightedRandomSampler** was introduced to balance the dataset in the case of class imbalance.
-- We implemented a custom `GenderDataset` class to streamline the dataloader pipeline.
 
 #### Optimization Strategy
 
 - **Adam** optimizer with an initial learning rate of `3e-5`.
-- **ReduceLROnPlateau** scheduler to adaptively reduce learning rate based on validation loss stagnation.
+- **ReduceLROnPlateau** scheduler to adaptively reduce learning rate.
 - Early stopping and model checkpointing were used to prevent overfitting.
 
 #### Evaluation Metrics
@@ -49,8 +48,9 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 ---
 > [!NOTE]
 > More about how to run the code is discussed in [Task A README](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/TaskA/README.md)
+> The pre-trained model weights for Task A can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1mB9Lqozewq4QgigvqeLhURdgIKyrKcZD/view?usp=sharing).
 
-## Task B: Face Recognition (Verification)
+## Task B: Face Recognition
 
 ### 📝 Problem Statement
 
@@ -113,7 +113,3 @@ Both tasks benefit from the shared strengths of **Swin Transformer**, including:
 
 ---
 
-## 📁 Directory Structure
-
-
-The pre-trained model weights for Task A can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1mB9Lqozewq4QgigvqeLhURdgIKyrKcZD/view?usp=sharing).
