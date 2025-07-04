@@ -62,6 +62,7 @@ To evaluate a model on a separate test set: we need another additional argument 
 > [!IMPORTANT]
 > 1. the ```--test_data_dir``` argument is required always. <br/>
 > 2. The pre-trained model weights can be accessed and downloaded from [*best_model.pth*](https://drive.google.com/file/d/1mB9Lqozewq4QgigvqeLhURdgIKyrKcZD/view?usp=sharing).
+> 3. For testing using pre-trained model weights, we need to run the command ```python main.py --evaluate_only --test_data_dir /path/to/test/dataset``` and for both training and testing, we need to run the command ```python main.py --test_data_dir /path/to/test/dataset```.
 
 ## Command-line Arguments
 Here's a detailed list of all available command-line arguments for ```main.py```:
