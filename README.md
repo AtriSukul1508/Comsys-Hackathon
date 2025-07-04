@@ -120,5 +120,5 @@ We implemented a **Siamese Network** architecture using **Swin Transformer V2** 
 ---
 > [!NOTE]
 > More about how to run the code is discussed in [Task B README](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/TaskB/README.md) <br/>
-> The pre-trained model weights for Task A can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1xtsd0zAtk8nWcTCWY_7lWZvt-knz6YIy/view?usp=sharing).
+> The pre-trained model weights for Task B can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1xtsd0zAtk8nWcTCWY_7lWZvt-knz6YIy/view?usp=sharing).
 
