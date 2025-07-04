@@ -1,11 +1,42 @@
 # COMSYS Hackathon-5, 2025
-
 This repository contains solutions for two tasks:
 
 - **Task A: Gender Classification**
 - **Task B: Face Recognition**
 
 ---
+## Dataset: FACECOM (Face Attributes in Challenging Environments)
+
+**FACECOM** is a purpose-built dataset created to benchmark face analysis algorithms in real-world degraded visual conditions. It contains over **5,000 face images**, captured or synthesized under a variety of challenging environmental scenarios.
+
+#### Visual Conditions Covered:
+
+- Motion Blur  
+- Overexposed / Sunny Scenes  
+- Foggy Conditions  
+- Rainy Weather Simulation  
+- Low Light Visibility  
+- Uneven Lighting / Glare  
+
+These diverse visual settings make FACECOM a suitable benchmark for robust and realistic face-related tasks.
+
+#### Annotations
+
+- **Gender (Male / Female)**:  
+  - Used for **Task A: Gender Classification**
+  - Binary classification label
+  
+- **Person Identity (ID)**:  
+  - Used for **Task B: Face Recognition**
+  - Multi-class label representing unique identities
+
+#### Dataset Splits
+
+- **Training Set**: 70%  
+- **Validation Set**: 15%  
+- **Test Set (Hidden)**: 15%
+
+More Details about the dataset is discussed in [data](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/data/README.md).
 
 ## Task A: Gender Classification
 
@@ -47,7 +78,7 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 
 ---
 > [!NOTE]
-> More about how to run the code is discussed in [Task A README](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/TaskA/README.md)
+> More about how to run the code is discussed in [Task A README](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/TaskA/README.md) <br/>
 > The pre-trained model weights for Task A can be accessed and downloaded from [best_model.pth](https://drive.google.com/file/d/1mB9Lqozewq4QgigvqeLhURdgIKyrKcZD/view?usp=sharing).
 
 ## Task B: Face Recognition
