@@ -65,8 +65,7 @@ To evaluate a model on a separate test set: we need another additional argument 
 Here's a detailed list of all available command-line arguments for ```main.py```:
 
 > [!IMPORTANT]
-> *The models are run with the default values of the arguments listed below unless explicitly overridden via command-line arguments.*
-
+> *The models are run with the default values of the arguments listed below.*
 
 ```--train_data_dir (type: str, default: '../data/Task_A/train')```: Path to the training data directory.
 
