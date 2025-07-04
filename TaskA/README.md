@@ -15,7 +15,7 @@ TaskA/
 │   ├── test.py  
 │   └── train.py             
 ├── main.py  
-├── model.pth                   
+├── best_model.pth                   
 ├── requirements.txt           
 └── README.md                 
 ```
@@ -61,7 +61,7 @@ To evaluate a model on a separate test set: we need another additional argument 
 #### 
 > [!IMPORTANT]
 > 1. the ```--test_data_dir``` argument is required always. <br/>
-> 2. The pre-trained model weights can be accessed and downloaded from [*best_model.pth*](https://drive.google.com/file/d/1gXEd6ah-tMb6XI0VT9fIKhFPhm95B99m/view?usp=sharing).
+> 2. The pre-trained model weights can be accessed and downloaded from [*best_model.pth*](https://drive.google.com/file/d/1mB9Lqozewq4QgigvqeLhURdgIKyrKcZD/view?usp=sharing).
 
 ## Command-line Arguments
 Here's a detailed list of all available command-line arguments for ```main.py```:
@@ -100,7 +100,7 @@ Here's a detailed list of all available command-line arguments for ```main.py```
 
 Output Paths:
 
-```--model_save_path (type: str, default: model.pth)```: Path to save the best trained model weights during training, or to load weights from for testing.
+```--model_save_path (type: str, default: best_model.pth)```: Path to save the best trained model weights during training, or to load weights from for testing.
 
 ```--plot_save_dir (type: str, default: plots)```: Directory to save training plots (loss/accuracy curves) and the confusion matrix.
 
