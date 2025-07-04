@@ -107,7 +107,7 @@ We implemented a **Siamese Network** architecture using **Swin Transformer V2** 
 - The final decision was made using a small decision head.
   
 #### Model Architecture
-<img src="./TaskB/model/TaskB.png" width="300px" height="150px"/>
+<img src="./TaskB/model/TaskB.png" width="800px" height="350px"/>
 
 #### Loss Function
 
