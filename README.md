@@ -42,7 +42,7 @@ More Details about the dataset is discussed in [data](https://github.com/AtriSuk
 
 ## Task A: Gender Classification
 
-### 📝 Problem Statement
+### Problem Statement
 
 The objective was to classify the gender of individuals from facial images. This is a supervised classification task with two classes: **male** and **female**.
 
@@ -85,15 +85,15 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 
 ## Task B: Face Recognition
 
-### 📝 Problem Statement
+### Problem Statement
 
-This is a face verification task where the goal is to determine whether two given face images belong to the same individual. This is a **binary similarity task**, also known as face matching.
+This is a face recognition task where the goal is Assign each face image to a correct person identity from a known set of individuals.
 
 ---
 
-### 🔧 Implementation Details
+### Implementation Details
 
-#### ✅ Architecture
+#### Architecture
 
 We implemented a **Siamese Network** architecture using **Swin Transformer V2** as the feature extractor.
 
@@ -102,47 +102,22 @@ We implemented a **Siamese Network** architecture using **Swin Transformer V2** 
 - The final decision was made using a small decision head:
   - Fully Connected Layer → BatchNorm → Dropout → Output Layer (`sigmoid`).
 
-#### ✅ Loss Function
+#### Loss Function
 
-- **Binary Cross Entropy Loss** for similarity prediction (output between 0 and 1).
+- This solution uses a custom loss function ```SiameseHybridLoss```, which combines contrastive loss (based on Euclidean distance) and cosine similarity-based BCEWithLogits loss to effectively learn discriminative embeddings. Both components of the loss function are balanced using a hyperparameter ```alpha```.
+  
+#### Dataset Preparation
 
-#### ✅ Dataset Preparation
-
-- Dataset consists of pairs of face images along with a binary label:
+- Custom `SiameseFaceDataset` class was used for efficient pair loading.
+- Custom dataset consists of pairs of face images along with a binary label:
   - `1` if both images are of the same person.
   - `0` otherwise.
-- Custom `FacePairDataset` class was used for efficient pair loading.
 
-#### ✅ Optimization and Training
+#### Evaluation Metrics
 
-- Optimized using **Adam** optimizer with a learning rate of `1e-4`.
-- **Validation AUC** and **loss** were tracked to evaluate performance.
-- **Sigmoid output** was thresholded (e.g., 0.5) during testing to assign class labels.
-
-#### ✅ Evaluation Metrics
-
-- **Accuracy**
-- **ROC AUC Score**
-- **F1 Score**
-- **Confusion Matrix**
+- **Top-1 Accuracy**
+- **Macro-averaged F1-Score**
 
 ---
 
-### 🔁 Key Updates & Enhancements
-
-- Refactored the training loop to support **Siamese input pairs**.
-- Added modular testing and validation support for face pair verification.
-- Integrated GPU-accelerated batch processing.
-- Model saved and loaded using `torch.save()` and `torch.load()` conventions.
-
----
-
-## 💡 Common Components
-
-Both tasks benefit from the shared strengths of **Swin Transformer**, including:
-- Hierarchical attention for spatially aware feature maps.
-- Strong generalization on small datasets.
-- Flexibility to plug into classification and metric learning setups.
-
----
 
