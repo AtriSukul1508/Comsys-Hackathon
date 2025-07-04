@@ -51,13 +51,10 @@ By default, the ```utils/data_processing.py``` script uses ```train_dir,val_dir`
 ## How to Run
 The ```main.py``` script handles the entire workflow. We can run it from the project's root directory (**TaskA/**) using the ```python main.py``` command, along with various arguments to control its behavior.
 
-
 ```--evaluate_only```: Performs testing only. This requires either a pre-trained model to be available at the path specified by ```--model_save_path``` or model training. By default ```--model_save_path``` value is set to ```best_model.pth```.
-
 
 To evaluate a model on a separate test set: we need another additional argument ```--test_data_dir``` along with the ```--evaluate_only``` argument.
 
-```python main.py --evaluate_only --test_data_dir /path/to/test/dataset```
 #### 
 > [!IMPORTANT]
 > 1. the ```--test_data_dir``` argument is required always. <br/>
