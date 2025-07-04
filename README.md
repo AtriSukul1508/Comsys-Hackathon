@@ -63,7 +63,7 @@ We used **Swin Transformer V2 Small** (`swin_v2_s`) from `torchvision.models` as
 - We added **CrossEntropyLoss** as the loss function for this binary classification problem.
 
 #### Model Architecture
-![TaskA](https://github.com/user-attachments/assets/daa62f82-7df4-438e-b76b-d7333d464109)
+<img src="./TaskA/model/TaskA.png" width="300px" height="150px"/>
 
 #### Dataset Handling
 
