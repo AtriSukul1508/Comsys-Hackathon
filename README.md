@@ -98,13 +98,16 @@ This is a face recognition task where the goal is to assign each face image to a
 
 ### Implementation Details
 
-#### Architecture
+#### Base Architecture
 
 We implemented a **Siamese Network** architecture using **Swin Transformer V2** as the feature extractor.
 
 - The same Swin Transformer (`swin_v2_s`) was shared between two input branches.
 - Feature vectors from both branches were compared using the **L1 distance** (absolute difference).
 - The final decision was made using a small decision head.
+  
+#### Model Architecture
+<img src="./TaskB/model/TaskB.png" width="300px" height="150px"/>
 
 #### Loss Function
 
