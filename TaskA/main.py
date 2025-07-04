@@ -11,9 +11,22 @@ from utils.train import train_model
 from utils.test import test_model
 from utils.plots import plots
 from utils.evaluation import evaluate_model
+import numpy as np
+import random
+
 
 def main(args):
-    
+
+    seed = 42
+
+    torch.manual_seed(seed)
+
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)  
+
+    random.seed(seed)
+
+    np.random.seed(seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"device: {device}")
     is_training_weight_available = True
@@ -91,8 +104,8 @@ if __name__ == '__main__':
                         help='Path to the training data directory.')
     parser.add_argument('--val_data_dir', type=str, default=val_dir,
                         help='Path to the validation data directory.')
-    parser.add_argument('--test_data_dir', type=str, default=test_dir, 
-                        required=True, help='Path to the testing data directory.')
+    parser.add_argument('--test_data_dir', type=str, default=test_dir, required=True,
+                        help='Path to the testing data directory.')
     parser.add_argument('--batch_size', type=int, default=32,
                         help='Batch size for data loaders.')
 
