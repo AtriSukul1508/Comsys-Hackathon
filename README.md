@@ -38,6 +38,8 @@ These diverse visual settings make FACECOM a suitable benchmark for robust and r
 
 More Details about the dataset is discussed in [data](https://github.com/AtriSukul1508/Comsys-Hackathon/blob/main/data/README.md).
 
+---
+
 ## Task A: Gender Classification
 
 ### 📝 Problem Statement
