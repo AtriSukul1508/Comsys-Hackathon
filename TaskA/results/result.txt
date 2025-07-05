@@ -1,14 +1,39 @@
+Classification Report on Training dataset
+
 📊 Classification Report:
                precision    recall  f1-score   support
 
-      female       0.83      0.81      0.82       105
-        male       0.94      0.94      0.94       317
+      female       0.91      0.90      0.90       394
+        male       0.97      0.98      0.98      1532
 
-    accuracy                           0.91       422
-   macro avg       0.88      0.88      0.88       422
-weighted avg       0.91      0.91      0.91       422
+    accuracy                           0.96      1926
+   macro avg       0.94      0.94      0.94      1926
+weighted avg       0.96      0.96      0.96      1926
 
-✅ Accuracy: 0.909952606635071
-🎯 Precision: 0.9094215101574005
-🔁 Recall: 0.909952606635071
-🏅 F1 Score: 0.9096612704264944
+Accuracy:, 0.9611
+Precision:, 0.9609
+Recall:, 0.9611
+F1 Score:, 0.9610
+
+✅ Accuracy: 0.9611
+🎯 Precision: 0.9609
+🔁 Recall: 0.9611
+🏅 F1 Score: 0.9610
+
+Classification Report on Validation dataset
+
+📊 Classification Report:
+               precision    recall  f1-score   support
+
+      female       0.91      0.79      0.85       105
+        male       0.93      0.97      0.95       317
+
+    accuracy                           0.93       422
+   macro avg       0.92      0.88      0.90       422
+weighted avg       0.93      0.93      0.93       422
+
+
+✅ Accuracy: 0.9289
+🎯 Precision: 0.9282
+🔁 Recall: 0.9289
+🏅 F1 Score: 0.9271
