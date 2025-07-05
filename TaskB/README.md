@@ -80,7 +80,7 @@ Here's a detailed list of all available command-line arguments for ```main.py```
 
 ```--val_data_dir (type: str, default: '../data/Task_A/val')```: Path to the validation data root directory.
 
-```--test_data_dir (type: str, default: "", required=True)```: Path to the test data root directory. Since, the test data is not given, default value of ```---test_data_dir``` is set to ```""```.
+```--test_data_dir (type: str, default: "", required=True)```: Path to the test data root directory. Since, the test data is not given, default value of ```--test_data_dir``` is set to ```""```.
 
 ```--evaluate_only (action: store_true)```: If set, skips training and only performs evaluation on the loaded model.
 
