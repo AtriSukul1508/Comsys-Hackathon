@@ -4,9 +4,17 @@
 ## Directory Structure
 ```
 TaskA/
+├── model/
+│   ├── TaskA.png    
 ├── plots/
-│   ├── confusion_matrix.png    
-│   ├── training_curves.png  
+│   ├── train_confusion_matrix.png
+│   ├── training_curves.png
+│   ├── val_confusion_matrix.png  
+├── results/
+│   ├── results.txt    
+│   ├── train_confusion_matrix.png
+│   ├── training_curves.png
+│   ├── val_confusion_matrix.png  
 ├── utils/
 │   ├── data_processing.py     
 │   ├── evaluation.py                 
