@@ -1,4 +1,4 @@
-Classification Report on training dataset
+CLASSIFICATION REPORT ON TRAINING DATASET
 
 📊 Classification Report:
                precision    recall  f1-score   support
@@ -17,7 +17,7 @@ weighted avg       0.90      0.89      0.89      8770
 
 
 
-Classification Report on validation dataset
+CLASSIFICATION REPORT ON VALIDATION DATASET
 
 📊 Classification Report:
                precision    recall  f1-score   support
