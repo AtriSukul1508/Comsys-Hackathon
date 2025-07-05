@@ -111,7 +111,7 @@ We implemented a **Siamese Network** architecture using **Swin Transformer V2** 
 
 #### Loss Function
 
-- This solution uses a custom loss function ```SiameseHybridLoss```, which combines contrastive loss (based on Euclidean distance) and cosine similarity-based BCEWithLogits loss to effectively learn discriminative embeddings. Both components of the loss function are balanced using a hyperparameter ```alpha```.
+- This solution uses a custom loss function ```SiameseHybridLoss```, which combines contrastive loss (based on Euclidean distance) and cosine similarity-based BCEWithLogits loss to effectively learn discriminative embeddings. Both components of the loss function are balanced using a hyperparameter ```alpha```. <br/>
                         ```SiameseHybridLoss = α * contrastive + (1-α) * BCELogits(Cosine_Similarity)```
   
 #### Dataset Preparation
