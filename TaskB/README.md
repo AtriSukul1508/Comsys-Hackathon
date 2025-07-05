@@ -74,37 +74,42 @@ Here's a detailed list of all available command-line arguments for ```main.py```
 > [!IMPORTANT]
 > *The models are run with the default values of the arguments listed below.*
 
-```--train_data_dir (type: str, default: '../data/Task_A/train')```: Path to the training data directory.
+### Command-Line Arguments
 
-```--val_data_dir (type: str, default: '../data/Task_A/val')```: Path to the validation data directory.
+```--train_data_dir (type: str, default: '../data/Task_B/train')```: Path to the training data root directory.
 
-```--test_data_dir (type: str, default: "",required=True)```: Path to the test data directory. Since, the test data is not given, default value of ```---test_data_dir``` is set to ```""```.
+```--val_data_dir (type: str, default: '../data/Task_A/val')```: Path to the validation data root directory.
 
-```--batch_size (type: int, default: 32)```: Batch size for data loaders.
+```--test_data_dir (type: str, default: "", required=True)```: Path to the test data root directory. Since, the test data is not given, default value of ```---test_data_dir``` is set to ```""```.
 
-```--num_classes (type: int, default: 2)```: Number of output classes for the model (e.g., 2 for male/female).
+```--evaluate_only (action: store_true)```: If set, skips training and only performs evaluation on the loaded model.
 
 ```--epochs (type: int, default: 50)```: Number of training epochs.
 
-```--learning_rate (type: float, default: 3e-5)```: Initial learning rate for the optimizer.
+```--batch_size (type: int, default: 16)```: Batch size for data loaders.
 
-```--weight_decay (type: float, default: 1e-4)```: Weight decay (L2 penalty) for the optimizer, helps prevent overfitting.
+```--embedding_dim (type: int, default: 128)```: Dimension of the learned embeddings.
 
-```--label_smoothing (type: float, default: 0.08)```: Label smoothing factor for the loss function, can improve generalization.
+```--learning_rate (type: float, default: 1e-6)```: Initial learning rate for the optimizer.
 
-```--use_amp (action: store_true)```: If set, enables Automatic Mixed Precision (AMP) for faster training and reduced memory usage.
+```--weight_decay (type: float, default: 1e-4)```: Weight decay for the optimizer.
 
-```--max_grad_norm (type: float, default: 1.0)```: Maximum gradient norm for gradient clipping. Set to 0 for no clipping. Helps prevent exploding gradients.
+```--margin (type: float, default: 1.0)```: Margin for the contrastive loss component.
 
-```--early_stopping_patience (type: int, default: 5)```: Number of epochs to wait for validation loss improvement before stopping training.
+```--alpha (type: float, default: 0.5)```: Weighting factor for the hybrid loss (`alpha * contrastive + (1 - alpha) * cosine_bce`).
 
-```--lr_patience (type: int, default: 3)```: Patience for ReduceLROnPlateau scheduler. Number of epochs with no improvement after which learning rate will be reduced.
+```--patience (type: int, default: 5)```: Patience for early stopping.
 
-```--lr_decay_factor (type: float, default: 0.5)```: Factor by which the learning rate will be reduced (e.g., new_lr = old_lr * factor).
+```--use_amp (type: bool, default: True)```: Whether to use Automatic Mixed Precision (AMP).
 
-Output Paths:
+```--max_grad_norm (type: float, default: 1.0)```: Maximum gradient norm for clipping.
 
-```--model_save_path (type: str, default: best_model.pth)```: Path to save the best trained model weights during training, or to load weights from for testing.
+```--cosine_threshold (type: float, default: 0.5)```: Threshold for cosine similarity to classify "same" during evaluation.
 
-```--plot_save_dir (type: str, default: plots)```: Directory to save training plots (loss/accuracy curves) and the confusion matrix.
+#### Output Paths
+
+```--model_save_path (type: str, default: "best_model.pth")```: Name of the file to save the best model.
+
+```--plot_save_dir (type: str, default: "plots")```: Directory to save training plots.
+
 
