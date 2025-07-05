@@ -1,4 +1,4 @@
-## Classification Report on Training dataset
+CLASSIFICATION REPORT ON TRAINING DATASET
 
 📊 Classification Report:
                precision    recall  f1-score   support
@@ -20,7 +20,7 @@ F1 Score:, 0.9610
 🔁 Recall: 0.9611
 🏅 F1 Score: 0.9610
 
-## Classification Report on Validation dataset
+CLASSIFICATION REPORT ON VALIDATION DATASET
 
 📊 Classification Report:
                precision    recall  f1-score   support
